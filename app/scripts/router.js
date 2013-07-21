@@ -1,0 +1,5 @@
+HappeningsProjectEmberClient.Router.map(function () {
+  
+});
+
+
