@@ -13,10 +13,10 @@
       <div>
         <div class="span3">
           <div class="well sidebar-nav">
-            <span class="nav-header">Colors</span>
+            <span class="nav-header"></span>
             <ul class="nav nav-list">
             {{#each item in controller}}
-              <li>{{item}}</li>
+              <li><a {{action 'filterHappenings' item}}> {{item.id}} </a></li>
             {{/each}}
             </ul>
           </div>

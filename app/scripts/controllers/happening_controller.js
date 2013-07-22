@@ -1,4 +1,4 @@
-// HappeningsProjectEmberClient.HappeningController = Ember.ObjectController.extend({
-//   // Implement your controller here.
-// });
+HappeningsProjectEmberClient.HappeningController = Ember.ArrayController.extend({
+  // Implement your controller here.
+});
 

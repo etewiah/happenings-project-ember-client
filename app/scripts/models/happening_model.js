@@ -46,32 +46,43 @@ HappeningsProjectEmberClient.Happening = DS.Model.extend({
 
 
 HappeningsProjectEmberClient.Happening.reopenClass({
-  getHappenings: function() {
+  getHappenings: function(range) {
 
-      var url = "/happenings.json";
-      return $.getJSON(url).then(function (response) {
+      var url = "http://happenings_project.dev/api/v1/flat_happenings"; 
+      var data = {};
+      var today = new Date();
+      var tomorrow = new Date();
+      tomorrow.setDate(today.getDate()+1);
+      if(range === "today"){
+        data.day_range =  today.toISOString();
+      }
+      else{
+        data.day_range = tomorrow.toISOString();
+      }
+
+      return $.getJSON(url, data).then(function (response) {
           var links = [];
-          $(response.events.event).each(function() {  
+          $(response.flat_happenings).each(function() {  
              
                 // var happeningResource = {};
 
                 var happeningResource = HappeningsProjectEmberClient.Happening.createRecord({
-                  title: this.title,
+                  title: this.name,
                   // description: this.description,
-                  origin: "last_fm",
                   start_date: this.startDate,
-                  external_urls: [ {url: this.url, trait: "source" }]
+                  // external_urls: [ {url: this.url, trait: "source" }],
+                  image_url: this.images[0].url
                 });
 
-                if (this.image[1]['#text']){
-                  var pictures = [{
-                    alt: "medium",
-                    url: this.image[1]['#text']
-                  }];
-                  happeningResource.set('pics', pictures);
-                  happeningResource.set('description', pictures);
-                  // happeningResource.set('traits', pictures)
-                }
+                // if (this.image[1]['#text']){
+                //   var pictures = [{
+                //     alt: "medium",
+                //     url: this.image[1]['#text']
+                //   }];
+                //   happeningResource.set('pics', pictures);
+                //   happeningResource.set('description', pictures);
+                //   // happeningResource.set('traits', pictures)
+                // }
 
 
             links.push(happeningResource);

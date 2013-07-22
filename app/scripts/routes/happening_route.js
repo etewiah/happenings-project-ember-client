@@ -1,8 +1,9 @@
 HappeningsProjectEmberClient.HappeningRoute = Ember.Route.extend({
   // Implement your controller here.
-  model: function () {
-    // return ['red', 'yellow', 'blue'];
-  	return HappeningsProjectEmberClient.Happening.getHappenings();
+  model: function (params) {
+  	// debugger;
+   //  // return ['red', 'yellow', 'blue'];
+  	// return HappeningsProjectEmberClient.Happening.getHappenings();
   }
 
 
