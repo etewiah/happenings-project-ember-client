@@ -1,4 +1,29 @@
-<h1>List of Happenings</h1>
+    <div class="row-fluid">
+      <div>
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <span class="nav-header"></span>
+            <ul class="nav nav-list">
+            {{#each item in rangeNavItems}}
+              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappenings' rangeNavItems item}}> {{item.title}} </a></li>
+            {{/each}}
+            </ul>
+          </div>
+
+          <div class="well sidebar-nav">
+            <span class="nav-header"></span>
+            <ul class="nav nav-list">
+            {{#each item in cityNavItems}}
+              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappenings' cityNavItems item}}> {{item.title}} </a></li>
+            {{/each}}
+            </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h1>List of Happenings</h1>
+					{{outlet}}
+        </div>
+      </div>
+    </div>
 
 
-{{outlet}}

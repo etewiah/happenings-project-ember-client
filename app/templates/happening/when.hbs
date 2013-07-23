@@ -1,7 +1,6 @@
-            <ul class="nav nav-list">
-            {{#each item in controller}}
-              <li>{{item.title}}  ( {{item.start_date }})  {{item.city}} </li>
-            {{/each}}
-            </ul>
+<ul class="nav nav-list">
+{{#each item in content}}
+  <li>{{item.title}}  ( {{item.start_date }})  {{item.city}} </li>
+{{/each}}
+</ul>
 
-{{outlet}}

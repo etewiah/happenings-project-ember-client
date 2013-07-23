@@ -46,23 +46,35 @@ HappeningsProjectEmberClient.Happening = DS.Model.extend({
 
 
 HappeningsProjectEmberClient.Happening.reopenClass({
-  getHappenings: function(range) {
 
-      var url = "http://happenings_project.dev/api/v1/flat_happenings"; 
-      var data = {};
+  currentCity: "Madrid",
+  currentRange: "today",
+
+  getHappenings: function(range, city) {
+    // if(city === undefined || city === ''){
+    //   city = "Madrid";
+    // }
+
+    // if(range === undefined || range === ''){
+    //   range = "today";
+    // }
+
+
+      var url = "http://happenings-project.dev/api/v1/flat_happenings"; 
+      var data = {city: HappeningsProjectEmberClient.Happening.currentCity};
       var today = new Date();
-      if(range === "today"){
+      if(HappeningsProjectEmberClient.Happening.currentRange === "today"){
         data.day_range =  today.toISOString();
       }
-      else if(range === "tomorrow"){
+      else if(HappeningsProjectEmberClient.Happening.currentRange === "tomorrow"){
         var tomorrow = new Date();
         tomorrow.setDate(today.getDate()+1);
         data.day_range = tomorrow.toISOString();
       }
-      else if(range === "this_week"){
+      else if(HappeningsProjectEmberClient.Happening.currentRange === "this_week"){
         data.week_range = today.toISOString();
       }
-      else if(range === "next_week"){
+      else if(HappeningsProjectEmberClient.Happening.currentRange === "next_week"){
         var next_week_start = new Date();
         next_week_start.setDate(today.getDate()+7);
         data.week_range = next_week_start.toISOString();
