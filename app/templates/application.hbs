@@ -16,7 +16,7 @@
             <span class="nav-header"></span>
             <ul class="nav nav-list">
             {{#each item in controller}}
-              <li><a {{action 'filterHappenings' item}}> {{item.id}} </a></li>
+              <li {{bindAttr class="item.class"}}><a {{action 'filterHappenings' this item}}> {{item.id}} </a></li>
             {{/each}}
             </ul>
           </div>
