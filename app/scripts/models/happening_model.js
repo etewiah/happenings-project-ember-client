@@ -60,7 +60,8 @@ HappeningsProjectEmberClient.Happening.reopenClass({
     // }
 
 
-      var url = "http://happenings-project.dev/api/v1/flat_happenings"; 
+      var url = "http://happenings-project.herokuapp.com/api/v1/flat_happenings"
+      // "http://happenings-project.dev/api/v1/flat_happenings"; 
       var data = {city: HappeningsProjectEmberClient.Happening.currentCity};
       var today = new Date();
       if(HappeningsProjectEmberClient.Happening.currentRange === "today"){
