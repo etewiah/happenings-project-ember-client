@@ -1,49 +1,30 @@
 HappeningsProjectEmberClient.HappeningRoute = Ember.Route.extend({
 
-  // model: function () {
-  //   var items = [
-  //     {id: 'today', city: 'Madrid', range: 'today', cssClass: 'active'}, 
-  //     {id:'tomorrow', city: 'Madrid', range: 'tomorrow'}, 
-  //     {id:'this week', city: 'Madrid', range: 'this_week'},
-  //     {id: 'next week', city: 'Madrid', range: 'next_week'}
-  //   ];
-  //   return HappeningsProjectEmberClient.NavItem.getNavItems(items);
-  // },
-
 	events:{
+
     filterHappeningsByCategory : function(nav_items_model, filter){
-      nav_items_model.setEach('cssClass', '');
-      filter.set('cssClass', 'active')
+      // nav_items_model.setEach('cssClass', '');
+      // filter.set('cssClass', 'active')
       happeningController = this.controllerFor('happening');
       happeningController.set('currentCategory', filter.category);
     },
 
-	    filterHappenings : function(range_model, filter){
-        range_model.setEach('cssClass', '');
+    filterHappeningsByRange : function(nav_items_model, filter){
+      var happeningController = this.controllerFor('happening');
+      happeningController.set('navStructure.range', filter.value);
+      this.transitionTo("happening.when", {}); 
+    },
+    filterHappeningsByCity : function(nav_items_model, filter){
+      // var modelForRouter = {};
+      var happeningController = this.controllerFor('happening');
+      happeningController.set('navStructure.city', filter.value);
+      // var navStructure = happeningController.get('navStructure');
 
-        var modelForRouter = {};
-        if(filter.city !== ""){
-          modelForRouter.city_id = filter.city;
-          // HappeningsProjectEmberClient.Happening.currentCity = filter.city;
-        }
-        else{
-          modelForRouter.city_id = HappeningsProjectEmberClient.Happening.currentCity;
-        }
-        if(filter.range !== ""){
-          modelForRouter.range_id = filter.range;
-          // HappeningsProjectEmberClient.Happening.currentRange = filter.range;
-        }
-        else{
-          modelForRouter.range_id = HappeningsProjectEmberClient.Happening.currentRange;
-        }
+      // modelForRouter.range_id = happeningController.get('currentRange');
+      // modelForRouter.city_id = filter.value;
+      this.transitionTo("happening.when", {}); 
+    }
 
-	    	// var happenings = HappeningsProjectEmberClient.Happening.getHappenings(filter.range, filter.city);
-        filter.set('cssClass','active');
-        // var happeningController = this.controllerFor('happening');
-        // // below is used by nav_item_view to calculate which tab is active:
-        // if (happeningController) happeningController.set('filter', filter.range);
-	    	this.transitionTo("happening.when", modelForRouter);
-	    }
 	}
 
 

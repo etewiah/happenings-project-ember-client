@@ -5,7 +5,7 @@
             <span class="nav-header"></span>
             <ul class="nav nav-list">
             {{#each item in rangeNavItems}}
-              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappenings' rangeNavItems item}}> {{item.title}} </a></li>
+              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappeningsByRange' rangeNavItems item}}> {{item.title}} </a></li>
             {{/each}}
             </ul>
           </div>
@@ -14,7 +14,7 @@
             <span class="nav-header"></span>
             <ul class="nav nav-list">
             {{#each item in cityNavItems}}
-              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappenings' cityNavItems item}}> {{item.title}} </a></li>
+              <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappeningsByCity' cityNavItems item}}> {{item.title}} </a></li>
             {{/each}}
             </ul>
           </div>

@@ -1,18 +1,23 @@
 HappeningsProjectEmberClient.HappeningController = Ember.ArrayController.extend({
+  navStructure: {
+    city: "Madrid",
+    range: "today"
+  },
   currentCategory: "music",
-  currentCity: "",
+  currentRange: "today",
+  currentCity: "Madrid",
 
   rangeNavItems: function() {
-    return HappeningsProjectEmberClient.NavItem.getRangeNavItems(this.get('currentCategory'));
-  }.property('currentCategory'),
+    return HappeningsProjectEmberClient.NavItem.getRangeNavItems(this.get('navStructure.range'), this.get('currentCategory'));
+  }.property('currentCategory', 'navStructure.range'),
 
   cityNavItems: function() {
-    return HappeningsProjectEmberClient.NavItem.getCityNavItems(this.get('currentCity'));
-  }.property('currentCity'),
+    return HappeningsProjectEmberClient.NavItem.getCityNavItems(this.get('navStructure.city'));
+  }.property('navStructure.city'),
 
   categoryNavItems: function() {
-    return HappeningsProjectEmberClient.NavItem.getCategoryNavItems();
-  }.property()
+    return HappeningsProjectEmberClient.NavItem.getCategoryNavItems(this.get('currentCategory'));
+  }.property('currentCategory')
 
 });
 

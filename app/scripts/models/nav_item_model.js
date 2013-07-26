@@ -1,7 +1,7 @@
 HappeningsProjectEmberClient.NavItem = DS.Model.extend({
   activeItemTitle: "",
   cssClass: function() {
-    if(this.title.toLowerCase() === this.get('activeItemTitle').toLowerCase() ) return "active";
+    if(this.value.toLowerCase() === this.get('activeItemTitle').toLowerCase() ) return "active";
     // if(this.city === HappeningsProjectEmberClient.NavItem.currentCity) return "active";
     // if(this.get('controller.filterMode') === undefined && this.get('content.name') === "happenings") return "active";
     // if (this.get("content.name").toLowerCase().replace(' ','-') === this.get("controller.filterMode")) return "active";
@@ -13,8 +13,8 @@ HappeningsProjectEmberClient.NavItem = DS.Model.extend({
 
 HappeningsProjectEmberClient.NavItem.reopenClass({
 
-  defaultCity: "Madrid",
-  defaultRange: "today",
+  // defaultCity: "Madrid",
+  // defaultRange: "today",
   // I can take out references to static currentxxx later:
   // currentCity: "",
   // currentRange: "",
@@ -38,29 +38,29 @@ HappeningsProjectEmberClient.NavItem.reopenClass({
   getCityNavItems: function(currentCity){
     // HappeningsProjectEmberClient.NavItem.currentCity = currentCity;
     var items = [
-      {title: 'Madrid', city: 'Madrid', range: '', activeItemTitle: currentCity}, 
-      {title:'Berlin', city: 'Berlin', range: '', activeItemTitle: currentCity} 
+      {title: 'Madrid', value: 'Madrid',  activeItemTitle: currentCity}, 
+      {title:'Berlin', value: 'Berlin',  activeItemTitle: currentCity} 
 
     ];
     return HappeningsProjectEmberClient.NavItem.getNavItems(items);
   },
 
-  getCategoryNavItems: function() {
+  getCategoryNavItems: function(currentCategory) {
     var items = [
-      {title: 'Music', category: 'music', range: ''}, 
-      {title:'Cinema', category: 'cinema', range: ''}, 
+      {title: 'Music', value: 'music', activeItemTitle: currentCategory}, 
+      {title:'Cinema', value: 'cinema', activeItemTitle: currentCategory}, 
     ];
     return HappeningsProjectEmberClient.NavItem.getNavItems(items);
   },
 
-  getRangeNavItems: function(currentCategory){
+  getRangeNavItems: function(currentRange, currentCategory){
     var items = [
-      {title: 'today', city: '', range: 'today'}, 
-      {title:'tomorrow', city: '', range: 'tomorrow'}
+      {title: 'today', value: 'today', activeItemTitle: currentRange}, 
+      {title:'tomorrow', value: 'tomorrow', activeItemTitle: currentRange}
     ];
     if(currentCategory !== "cinema"){
-      items.push({title:'this week', city: '', range: 'this_week'});
-      items.push({title:'next week', city: '', range: 'next_week'});
+      items.push({title:'this week', value: 'this_week', activeItemTitle: currentRange});
+      items.push({title:'next week', value: 'next_week', activeItemTitle: currentRange});
     }
     return HappeningsProjectEmberClient.NavItem.getNavItems(items);
   }

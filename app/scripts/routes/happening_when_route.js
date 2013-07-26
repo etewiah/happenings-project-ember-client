@@ -10,7 +10,9 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
   // }
 
   serialize: function(model) {
-    return model;
+    happeningController = this.controllerFor('happening');
+    return happeningController.get('navStructure');
+    // return model;
     // return {city_id: HappeningsProjectEmberClient.Happening.currentCity, range_id: HappeningsProjectEmberClient.Happening.currentRange};  
   },
 
@@ -19,18 +21,21 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
     happeningController = this.controllerFor('happening');
     //happeningController.set('currentCategory', filter.category);
 
-    if(model.city_id === undefined){
-      model.city_id = HappeningsProjectEmberClient.NavItem.defaultCity;
-    }
-    if(model.range_id === undefined){
-      model.range_id = HappeningsProjectEmberClient.NavItem.defaultRange;
-    }
+// If page is loaded directly from a url with params, I set the correct controller values
 
-    happeningController.set('currentCity', model.city_id);
-
-    HappeningsProjectEmberClient.Happening.currentCity = model.city_id;
-    HappeningsProjectEmberClient.Happening.currentRange = model.range_id;
-  	var happenings = HappeningsProjectEmberClient.Happening.getHappenings();
+    if(model.city !== undefined){
+      // model.city = HappeningsProjectEmberClient.NavItem.defaultCity;
+      happeningController.set('navStructure.city', model.city);
+    }
+    if(model.range !== undefined){
+      // model.range = HappeningsProjectEmberClient.NavItem.defaultRange;
+      happeningController.set('navStructure.range', model.range);
+    }
+    // happeningController.set('currentCategory', model.category);
+    // happeningController.set('currentRange', model.range_id);
+    HappeningsProjectEmberClient.Happening.currentCity = happeningController.get('navStructure.city');
+    HappeningsProjectEmberClient.Happening.currentRange =  happeningController.get('navStructure.range');
+    var happenings = HappeningsProjectEmberClient.Happening.getHappenings();
     happenings.then(function(model) {
       controller.set('content', model);
     });
