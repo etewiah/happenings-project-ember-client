@@ -10,7 +10,7 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
   // }
 
   serialize: function(model) {
-    happeningController = this.controllerFor('happening');
+    happeningController = this.controllerFor('application');
     return happeningController.get('navStructure');
     // return model;
     // return {city_id: HappeningsProjectEmberClient.Happening.currentCity, range_id: HappeningsProjectEmberClient.Happening.currentRange};  
@@ -18,13 +18,14 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
 
 
   setupController: function(controller, model) {
-    happeningController = this.controllerFor('happening');
+    happeningController = this.controllerFor('application');
     //happeningController.set('currentCategory', filter.category);
 
 // If page is loaded directly from a url with params, I set the correct controller values
-
+    if(model.category !== undefined){
+      happeningController.set('navStructure.category', model.category);
+    }
     if(model.city !== undefined){
-      // model.city = HappeningsProjectEmberClient.NavItem.defaultCity;
       happeningController.set('navStructure.city', model.city);
     }
     if(model.range !== undefined){

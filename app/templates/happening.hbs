@@ -4,7 +4,7 @@
           <div class="well sidebar-nav">
             <span class="nav-header"></span>
             <ul class="nav nav-list">
-            {{#each item in rangeNavItems}}
+            {{#each item in controllers.application.rangeNavItems}}
               <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappeningsByRange' rangeNavItems item}}> {{item.title}} </a></li>
             {{/each}}
             </ul>
@@ -13,7 +13,7 @@
           <div class="well sidebar-nav">
             <span class="nav-header"></span>
             <ul class="nav nav-list">
-            {{#each item in cityNavItems}}
+            {{#each item in controllers.application.cityNavItems}}
               <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappeningsByCity' cityNavItems item}}> {{item.title}} </a></li>
             {{/each}}
             </ul>
@@ -22,7 +22,7 @@
           <div class="well sidebar-nav">
             <span class="nav-header"></span>
             <ul class="nav nav-list">
-            {{#each item in categoryNavItems}}
+            {{#each item in controllers.application.categoryNavItems}}
               <li {{bindAttr class="item.cssClass"}}><a {{action 'filterHappeningsByCategory' categoryNavItems item}}> {{item.title}} </a></li>
             {{/each}}
             </ul>
