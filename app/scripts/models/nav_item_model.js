@@ -12,6 +12,9 @@ HappeningsProjectEmberClient.NavItem = DS.Model.extend({
 
 HappeningsProjectEmberClient.NavItem.reopenClass({
 
+  defaultCity: "Madrid",
+  defaultRange: "today",
+
   getNavItems: function(items) {
 
     var navItems = []
