@@ -1,4 +1,5 @@
 HappeningsProjectEmberClient.HappeningWhenController = Ember.ObjectController.extend({
+  needs: ["application"]
   // rangeNavItems: function() {
   //   var items = [
   //     {title: 'today', city: '', range: 'today', cssClass: 'active'}, 

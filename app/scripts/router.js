@@ -2,7 +2,7 @@ HappeningsProjectEmberClient.Router.map(function () {
 
 		// this.route('happening', { path: '/' });
 
-    this.resource('happening', { path: '/happening'}, function() {
+    this.resource('happening', { path: '/all'}, function() {
 	    // this.route('show', { path: '/details/:id'});
 	    this.route('when', {path: '/'});
 	    this.route('when', {path: '/:category'});

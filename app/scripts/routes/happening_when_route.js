@@ -16,6 +16,19 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
     // return {city_id: HappeningsProjectEmberClient.Happening.currentCity, range_id: HappeningsProjectEmberClient.Happening.currentRange};  
   },
 
+  renderTemplate: function() {
+    if(HappeningsProjectEmberClient.Happening.currentCategory === "cinema"){
+      this.render('happeningCinema');
+    }
+    else{
+      this.render('happeningWhen');
+    }
+    // this.render('listTopics', {
+    //   into: 'list',
+    //   outlet: 'listView',
+    //   controller: 'listTopics'
+    // });
+  },
 
   setupController: function(controller, model) {
     happeningController = this.controllerFor('application');
@@ -32,11 +45,16 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
       // model.range = HappeningsProjectEmberClient.NavItem.defaultRange;
       happeningController.set('navStructure.range', model.range);
     }
-    // happeningController.set('currentCategory', model.category);
-    // happeningController.set('currentRange', model.range_id);
+
+    HappeningsProjectEmberClient.Happening.currentCategory = happeningController.get('navStructure.category');
     HappeningsProjectEmberClient.Happening.currentCity = happeningController.get('navStructure.city');
     HappeningsProjectEmberClient.Happening.currentRange =  happeningController.get('navStructure.range');
-    var happenings = HappeningsProjectEmberClient.Happening.getHappenings();
+    if(HappeningsProjectEmberClient.Happening.currentCategory === "cinema"){
+      var happenings = HappeningsProjectEmberClient.Happening.getCinemaHappenings();
+    }
+    else{
+      var happenings = HappeningsProjectEmberClient.Happening.getHappenings();
+    }
     happenings.then(function(model) {
       controller.set('content', model);
     });
