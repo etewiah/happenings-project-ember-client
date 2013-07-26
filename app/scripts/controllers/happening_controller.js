@@ -1,14 +1,9 @@
 HappeningsProjectEmberClient.HappeningController = Ember.ArrayController.extend({
-  rangeNavItems: function() {
-    var items = [
-      {title: 'today', city: '', range: 'today'}, 
-      {title:'tomorrow', city: '', range: 'tomorrow'}, 
-      {title:'this week', city: '', range: 'this_week'},
-      {title: 'next week', city: '', range: 'next_week'}
-    ];
-    return HappeningsProjectEmberClient.NavItem.getNavItems(items);
+  currentCategory: "music",
 
-  }.property(),
+  rangeNavItems: function() {
+    return HappeningsProjectEmberClient.NavItem.getRangeNavItems(this.get('currentCategory'));
+  }.property('currentCategory'),
 
   cityNavItems: function() {
     var items = [
@@ -18,6 +13,10 @@ HappeningsProjectEmberClient.HappeningController = Ember.ArrayController.extend(
     ];
     return HappeningsProjectEmberClient.NavItem.getNavItems(items);
 
+  }.property(),
+
+  categoryNavItems: function() {
+    return HappeningsProjectEmberClient.NavItem.getCategoryNavItems();
   }.property()
 
 });

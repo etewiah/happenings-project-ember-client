@@ -11,6 +11,13 @@ HappeningsProjectEmberClient.HappeningRoute = Ember.Route.extend({
   // },
 
 	events:{
+    filterHappeningsByCategory : function(nav_items_model, filter){
+      nav_items_model.setEach('cssClass', '');
+      filter.set('cssClass', 'active')
+      happeningController = this.controllerFor('happening');
+      happeningController.set('currentCategory', filter.category);
+    },
+
 	    filterHappenings : function(range_model, filter){
         range_model.setEach('cssClass', '');
 

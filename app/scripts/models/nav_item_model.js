@@ -27,6 +27,26 @@ HappeningsProjectEmberClient.NavItem.reopenClass({
     });
     return navItems;
 
+  },
+
+  getCategoryNavItems: function() {
+    var items = [
+      {title: 'Music', category: 'music', range: ''}, 
+      {title:'Cinema', category: 'cinema', range: ''}, 
+    ];
+    return HappeningsProjectEmberClient.NavItem.getNavItems(items);
+  },
+
+  getRangeNavItems: function(currentCategory){
+    var items = [
+      {title: 'today', city: '', range: 'today'}, 
+      {title:'tomorrow', city: '', range: 'tomorrow'}
+    ];
+    if(currentCategory !== "cinema"){
+      items.push({title:'this week', city: '', range: 'this_week'});
+      items.push({title:'next week', city: '', range: 'next_week'});
+    }
+    return HappeningsProjectEmberClient.NavItem.getNavItems(items);
   }
 
 });

@@ -25,7 +25,7 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
 
     HappeningsProjectEmberClient.Happening.currentCity = model.city_id;
     HappeningsProjectEmberClient.Happening.currentRange = model.range_id;
-  	var happenings = HappeningsProjectEmberClient.Happening.getHappenings('today');
+  	var happenings = HappeningsProjectEmberClient.Happening.getHappenings();
     happenings.then(function(model) {
       controller.set('content', model);
     });
