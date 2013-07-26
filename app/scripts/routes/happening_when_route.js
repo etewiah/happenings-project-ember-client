@@ -16,12 +16,17 @@ HappeningsProjectEmberClient.HappeningWhenRoute = Ember.Route.extend({
 
 
   setupController: function(controller, model) {
+    happeningController = this.controllerFor('happening');
+    //happeningController.set('currentCategory', filter.category);
+
     if(model.city_id === undefined){
       model.city_id = HappeningsProjectEmberClient.NavItem.defaultCity;
     }
     if(model.range_id === undefined){
       model.range_id = HappeningsProjectEmberClient.NavItem.defaultRange;
     }
+
+    happeningController.set('currentCity', model.city_id);
 
     HappeningsProjectEmberClient.Happening.currentCity = model.city_id;
     HappeningsProjectEmberClient.Happening.currentRange = model.range_id;

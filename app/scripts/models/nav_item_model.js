@@ -1,11 +1,12 @@
 HappeningsProjectEmberClient.NavItem = DS.Model.extend({
+  activeItemTitle: "",
   cssClass: function() {
-    if(this.range === HappeningsProjectEmberClient.Happening.currentRange ) return "active";
-    if(this.city === HappeningsProjectEmberClient.Happening.currentCity) return "active";
+    if(this.title.toLowerCase() === this.get('activeItemTitle').toLowerCase() ) return "active";
+    // if(this.city === HappeningsProjectEmberClient.NavItem.currentCity) return "active";
     // if(this.get('controller.filterMode') === undefined && this.get('content.name') === "happenings") return "active";
     // if (this.get("content.name").toLowerCase().replace(' ','-') === this.get("controller.filterMode")) return "active";
      return "";
-  }.property(),
+  }.property('activeItemTitle')
 });
 
 
@@ -14,10 +15,15 @@ HappeningsProjectEmberClient.NavItem.reopenClass({
 
   defaultCity: "Madrid",
   defaultRange: "today",
+  // I can take out references to static currentxxx later:
+  // currentCity: "",
+  // currentRange: "",
 
   getNavItems: function(items) {
 
-    var navItems = []
+    var navItems = [];
+    // why is above var available in the loop but this below isn't: 
+    // var that = this;
 
     $(items).each(function() {  
       var navItem = HappeningsProjectEmberClient.NavItem.createRecord(
@@ -27,6 +33,16 @@ HappeningsProjectEmberClient.NavItem.reopenClass({
     });
     return navItems;
 
+  },
+
+  getCityNavItems: function(currentCity){
+    // HappeningsProjectEmberClient.NavItem.currentCity = currentCity;
+    var items = [
+      {title: 'Madrid', city: 'Madrid', range: '', activeItemTitle: currentCity}, 
+      {title:'Berlin', city: 'Berlin', range: '', activeItemTitle: currentCity} 
+
+    ];
+    return HappeningsProjectEmberClient.NavItem.getNavItems(items);
   },
 
   getCategoryNavItems: function() {
